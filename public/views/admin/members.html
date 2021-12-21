@@ -1,0 +1,573 @@
+<style>
+    .req{
+        color: red;
+        font-size: 14px;
+    }
+    .card{
+        border: none;
+        border-top: 3px solid #17a2b8 ;
+    }
+    h4{
+        color: #17a2b8;
+    }
+    img{
+        object-fit: cover;object-position: top;
+    }
+    .view_image{
+        padding: 10px;
+        box-sizing: border-box;
+        border: 4px solid rgb(162, 166, 167) !important
+    }
+</style>
+<section class="content ">
+    <div class="container-fluid py-4" id="createMemberSection">
+        <div class="card shadow">
+            <div class="card-header">
+                <h4 class="m-0">Add Member</h4>
+            </div>
+            <form name="addMemberForm" novalidate enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="">Full Name <span class="req">*</span> </label>
+                                <input class="form-control" type="text" placeholder="Name"
+                                 name="mname" ng-model="ng_mname" pattern="^[a-z A-Z]*$" required>
+                            </div>
+                            <div ng-show="addMemberForm.mname.$dirty && addMemberForm.mname.$invalid">
+                                <small class="text-danger" ng-show="addMemberForm.mname.$invalid">
+                                    ( Only characters are allowed )
+                                </small>
+                                <br>
+                                <small class="text-danger" ng-show="addMemberForm.mname.$error.required">
+                                    Required
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="">Gender <span class="req">*</span> </label>
+                                <select id="" class="form-control" style="width: 100%;"
+                                name="gender" ng-model="ng_gender" required>
+                                    <option value="" selected>Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group" ng-show="addMemberForm.gender.$dirty && ng_gender == 0">
+                                <small class="text-danger"> Please Select Gender! </small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="">Phone <span class="req">*</span> </label>
+                                <input class="form-control"  type="text" placeholder="03053609490" 
+                                 name="mphone" ng-model="ng_mphone" required="required"
+                                  minlength="11" maxlength="11" pattern="^[0-9]*$">
+                            </div>
+                            <div class="form-group" ng-show="addMemberForm.mphone.$dirty && addMemberForm.mphone.$invalid">
+                                <small class="text-danger" ng-show="addMemberForm.mphone.$invalid">
+                                    ( Only number allowed, no character accepted )
+                                </small>
+                                <br>
+                                <small class="text-danger" ng-show="addMemberForm.mphone.$error.required">
+                                    Required*
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="">Blood Group <span class="req">*</span> </label>
+                                <select name="" id="" class="form-control" 
+                                name="mbgroup" ng-model="ng_mbgroup" required>
+                                    <option value="" selected>Select Blood Group</option>
+                                    <option value="A-">A-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="O+">O+</option>
+                                </select>
+                            </div>
+                            <div class="form-group" ng-show="addMemberForm.mbgroup.$dirty && ng_mbgroup == 0">
+                                <small class="text-danger"> Please Select Blood Group! </small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="">Age <span class="req">*</span> </label>
+                                <input class="form-control" type="number" placeholder="Age" 
+                                name="mage" ng-model="ng_mage" required maxlength="2">
+                            </div>
+                            <div class="form-group" ng-show="addMemberForm.mage.$dirty && addMemberForm.mage.$invalid">
+                                <small class="text-danger" ng-show="addMemberForm.mage.$invalid">
+                                    ( Only number allowed, no character accepted )
+                                </small>
+                                <br>
+                                <small class="text-danger" ng-show="addMemberForm.mage.$error.required">
+                                    Required
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="">CNIC <small>(Optional)</small> </label>
+                                <input class="form-control"  type="text" placeholder="3130440236215" 
+                                 name="mcnic" ng-model="ng_mcnic"
+                                  minlength="13" maxlength="13" pattern="^[0-9]*$">
+                            </div>
+                            <div class="form-group" ng-show="addMemberForm.mcnic.$dirty && addMemberForm.mcnic.$invalid">
+                                <small class="text-danger" ng-show="addMemberForm.mcnic.$invalid">
+                                    ( Only number allowed, no character accepted )
+                                </small>
+                                <!-- <br>
+                                <small class="text-danger" ng-show="addMemberForm.mcnic.$error.required">
+                                    Required*
+                                </small> -->
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="">Package<span class="req">*</span> </label>
+                                <select name="" id="" class="form-control" 
+                                name="mpack" ng-model="ng_mpack" required>
+                                    <option value="" selected>Select Package</option>
+                                    <option ng-repeat="pack in packages_data" value="{{pack.package_id}}">
+                                        {{pack.package_name}}
+                                    </option>
+                                    <!-- <option class="text-danger" ng-if="staff_data == ''" value="">
+                                        No Package Found
+                                    </option> -->
+                                </select>
+                            </div>
+                            <div class="form-group" ng-show="addMemberForm.mpack.$dirty && ng_mpack == 0">
+                                <small class="text-danger"> Please Select Package! </small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-4 col-sm-12">
+                            <div>
+                                <label for="">Referal By<span class="req">*</span> </label>
+                                <select name="" id="" class="form-control " 
+                                name="mref" ng-model="ng_mref" required>
+                                    <option value="" selected>Select Referal</option>
+                                    <option ng-repeat="staff in staff_data" value="{{staff.instructor_id}}">
+                                        {{staff.instructor_name}}
+                                    </option>
+                                    <!-- <option class="text-danger" ng-if="staff_data == ''" value="">
+                                        No Referel Found
+                                    </option> -->
+                                </select>
+                            </div>
+                            <div class="form-group" ng-show="addMemberForm.mref.$dirty && ng_mref == 0">
+                                <small class="text-danger"> Please Select Referal! </small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label for="">Address <small>(optional)</small> </label>
+                            <textarea class="form-control" id="" rows="5" placeholder="Address" 
+                            name="maddress" ng-model="ng_maddress">
+
+                            </textarea>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label for="id_editStaffImg">Upload Image <small>(optional)</small> </label>
+                            <div style="width: 100%; height:auto;"  action="/file-upload" class="dropzone"
+                             id="member_dropzone"></div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 mt-4">
+                            <div class="col-lg-3 col-md-3 col-sm-3 mx-auto">
+                                <button class="btn btn-block btn-info btn-md" 
+                                ng-disabled="addMemberForm.$invalid || ng_gender===0 || ng_mbgroup===0" 
+                                ng-click="createMember()">Create Member</button> 
+                            </div>   
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            <div class="card-footer text-right">
+                <button class="btn btn-xs btn-dark" ng-click="hideaddMember()">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid py-4" id="memberListingSection">
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="m-0">Member Listing</h4>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="btn btn-sm btn-dark" ng-click="showCreateMemberSection()">
+                            <i class="far fa-plus-square"></i> Add Member
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive col-md-12">
+                <table class="table table-borderless table-hover" 
+                 datatable="ng" dt-option="vm.dtOptions">
+                 <caption>List of Members</caption>
+                    <thead class="thead-light">
+                        <tr class="">
+                            <th>Sr No.</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Blood Group</th>
+                            <th>Address</th>
+                            <th>Fee</th>
+                            <th>Package</th>
+                            <th>Referal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="member in members_data">
+                            <td class="align-middle">{{ $index+1 }}</td>
+                            <td class="align-middle">
+                                <span class="mr-2" ng-if="member.image !== ''">
+                                    <img ng-src="{{member.image}}" width="45px" height="45px" 
+                                    alt="" class="rounded-circle">
+                                </span>
+                                <span class="mr-2" ng-if="member.image == ''">
+                                    <img src="public/dist/img/avatar5.png" width="45px" height="45px" 
+                                    alt="" class="rounded-circle">
+                                </span>
+                                {{ member.fullname }}</td>
+                            <td class="align-middle">{{ member.phone }}</td>
+                            <td class="align-middle">{{ member.blood_group }}</td>
+                            <td class="align-middle">{{member.address}}</td>
+                            <td class="align-middle">{{member.package_amount}}</td>
+                            <td class="align-middle">{{member.package_name}}</td>
+                            <td class="align-middle">{{member.instructor_name}}</td>
+                            <td class="align-middle">
+                                <button class="btn btn-xs btn-primary" ng-click="viewMemberModal(member)">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                                <button class="btn btn-xs btn-success" ng-click="updateMemberModal(member)">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-xs btn-danger" ng-click="delMember(member.member_id)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Member Edit Modal Starts  -->
+<div class="modal fade" id="modalMemberEdit">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update Member</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="">
+                    <form name="editMemberForm" novalidate enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="row">
+                                <input type="hidden" ng-model="ng_editmid">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Full Name <span class="req">*</span> </label>
+                                        <input class="form-control" type="text" placeholder="Name"
+                                         name="editmname" ng-model="ng_editmname" pattern="^[a-z A-Z]*$" required>
+                                    </div>
+                                    <div ng-show="editMemberForm.editmname.$dirty && editMemberForm.editmname.$invalid">
+                                        <small class="text-danger" ng-show="editMemberForm.editmname.$invalid">
+                                            ( Only characters are allowed )
+                                        </small>
+                                        <br>
+                                        <small class="text-danger" ng-show="editMemberForm.editmname.$error.required">
+                                            Required
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Gender <span class="req">*</span> </label>
+                                        <select id="" class="form-control" style="width: 100%;"
+                                        name="editgender" ng-model="ng_editmgender" required>
+                                            <option value="" selected>Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" ng-show="editMemberForm.editgender.$dirty && ng_editmgender == 0">
+                                        <small class="text-danger"> Please Select Gender! </small>
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Phone <span class="req">*</span> </label>
+                                        <input class="form-control"  type="text" placeholder="03053609490" 
+                                         name="editmphone" ng-model="ng_editmphone" required="required"
+                                          minlength="11" maxlength="11" pattern="^[0-9]*$">
+                                    </div>
+                                    <div class="form-group" ng-show="editMemberForm.editmphone.$dirty && editMemberForm.editmphone.$invalid">
+                                        <small class="text-danger" ng-show="editMemberForm.editmphone.$invalid">
+                                            ( Only number allowed, no character accepted )
+                                        </small>
+                                        <br>
+                                        <small class="text-danger" ng-show="editMemberForm.editmphone.$error.required">
+                                            Required*
+                                        </small>
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Blood Group <span class="req">*</span> </label>
+                                        <select name="" id="" class="form-control" 
+                                        name="editsbgroup" ng-model="ng_editmbgroup" required>
+                                            <option value="" selected>Select Blood Group</option>
+                                            <option value="A-">A-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="O-">O-</option>
+                                            <option value="O+">O+</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" ng-show="editMemberForm.editsbgroup.$dirty && ng_editmbgroup == 0">
+                                        <small class="text-danger"> Please Select Blood Group! </small>
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Age <span class="req">*</span> </label>
+                                        <input class="form-control" type="number" placeholder="Age" 
+                                        name="editmage" ng-model="ng_editmage" required maxlength="2">
+                                    </div>
+                                    <div class="form-group" ng-show="editMemberForm.editmage.$dirty && editMemberForm.editmage.$invalid">
+                                        <small class="text-danger" ng-show="editMemberForm.editmage.$invalid">
+                                            ( Only number allowed, no character accepted )
+                                        </small>
+                                        <br>
+                                        <small class="text-danger" ng-show="editMemberForm.editmage.$error.required">
+                                            Required
+                                        </small>
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">CNIC <small>(Optional)</small> </label>
+                                        <input class="form-control"  type="text" placeholder="3130440236215" 
+                                         name="editmcnic" ng-model="ng_editmcnic"
+                                          minlength="13" maxlength="13" pattern="^[0-9]*$">
+                                    </div>
+                                    <div class="form-group" ng-show="editMemberForm.editmcnic.$dirty && editMemberForm.editmcnic.$invalid">
+                                        <small class="text-danger" ng-show="editMemberForm.editmcnic.$invalid">
+                                            ( Only number allowed, no character accepted )
+                                        </small>
+                                        <!-- <br>
+                                        <small class="text-danger" ng-show="editMemberForm.editmcnic.$error.required">
+                                            Required*
+                                        </small> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Package<span class="req">*</span> </label>
+                                        <select name="" id="" class="form-control" 
+                                        name="editmpack" ng-model="ng_editmpack" required>
+                                            <option value="" selected>Select Package</option>
+                                            <option ng-repeat="pack in packages_data" value="{{pack.package_id}}">
+                                                {{pack.package_name}}
+                                            </option>
+                                            <!-- <option class="text-danger" ng-if="staff_data == ''" value="">
+                                                No Package Found
+                                            </option> -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group" ng-show="editMemberForm.editmpack.$dirty && ng_editmpack == 0">
+                                        <small class="text-danger"> Please Select Package! </small>
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div>
+                                        <label for="">Referal By<span class="req">*</span> </label>
+                                        <select name="" id="" class="form-control " 
+                                        name="editmref" ng-model="ng_editmref" required>
+                                            <option value="" selected>Select Referal</option>
+                                            <option ng-repeat="staff in staff_data" value="{{staff.instructor_id}}">
+                                                {{staff.instructor_name}}
+                                            </option>
+                                            <!-- <option class="text-danger" ng-if="staff_data == ''" value="">
+                                                No Referel Found
+                                            </option> -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group" ng-show="editMemberForm.editmref.$dirty && ng_editmref == 0">
+                                        <small class="text-danger"> Please Select Referal! </small>
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="">Address <small>(optional)</small> </label>
+                                    <textarea class="form-control" id="" rows="5" placeholder="Address" 
+                                    name="editmaddress" ng-model="ng_editmaddress">
+        
+                                    </textarea>
+                                </div>
+        
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="id_editStaffImg">Upload Image <small>(optional)</small> </label>
+                                    <div style="width: 100%; height:auto;"  action="/file-upload" class="dropzone"
+                                     id="editmember_dropzone"></div>
+                                </div>
+        
+                                <div class="col-lg-12 col-md-12 col-sm-12 mt-4">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 mx-auto">
+                                        <button class="btn btn-block btn-info btn-md" 
+                                        ng-disabled="editMemberForm.$invalid || ng_editmgender===0 || ng_editmbgroup===0" 
+                                        ng-click="updateMember()">Update Member</button> 
+                                    </div>   
+                                </div>
+        
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- Member Edit Modal Ends  -->
+
+
+<!-- Member View Modal Starts  -->
+<div class="modal fade" id="modalMemberView">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">View Member</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3 text-center" ng-if="view_mimage !== ''">
+                        <img ng-src="{{view_mimage}}" alt="" class=" rounded-circle view_image" width="150px" height="150px">
+                    </div>
+                    <div class="col-md-3 text-center" ng-if="view_mimage == ''">
+                        <img src="public/dist/img/avatar5.png" alt="" class="rounded-circle view_image" width="150px" height="150px">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row py-2 bg-light">
+                            <div class="col-md-4">
+                                <h5>Name:</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>{{view_mname}}</h5>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-4">
+                                <h5>Phone:</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>{{view_mphone}}</h5>
+                            </div>
+                        </div>
+                        <div class="row py-2 bg-light">
+                            <div class="col-md-4">
+                                <h5>Blood Group:</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>{{view_mbgroup}}</h5>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-4">
+                                <h5>Address:</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>{{view_maddress}}</h5>
+                            </div>
+                        </div>
+                        <div class="row py-2 bg-light">
+                            <div class="col-md-4">
+                                <h5>Gender:</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>{{view_gender}}</h5>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-4">
+                                <h5>Age:</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>{{view_mage}}</h5>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-4">
+                                <h5>Package:</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>{{view_mpack}}</h5>
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-4">
+                                <h5>Reference:</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>{{view_mref}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- Member View Modal Ends  -->
+
+<script> 
+    $('.select2').select2();
+ 
+</script>
+    
+</script>

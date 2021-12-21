@@ -1,0 +1,170 @@
+<style>
+    .req{
+        color: red;
+        font-size: 14px;
+    }
+    .card{
+        border: none;
+        border-top: 3px solid #17a2b8 ;
+    }
+    .modal-header{
+        border: none;
+        border-top: 3px solid #17a2b8 ;
+        border-bottom: 1px solid lightgray;
+    }
+    h4{
+        color: #17a2b8;
+    }
+</style>
+<section class="content ">
+
+    <div class="container-fluid py-4" >
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="m-0">Member Listing</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive col-md-12">
+                <table class="table table-borderless table-hover" 
+                datatable="ng" dt-option="vm.dtOptions">
+                <caption>List of Members</caption>
+                   <thead class="thead-light">
+                       <tr class="">
+                        <th>Sr No.</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Blood Group</th>
+                        <th>Fee</th>
+                        <th>Package</th>
+                        <th>Referal</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr ng-repeat="member in members_data">
+                        <td class="align-middle">{{ $index+1 }}</td>
+                        <td class="align-middle">
+                            <span class="mr-2" ng-if="member.image !== ''">
+                                <img ng-src="{{member.image}}" width="45px" height="45px" 
+                                alt="" class="rounded-circle">
+                            </span>
+                            <span class="mr-2" ng-if="member.image == ''">
+                                <img src="public/dist/img/avatar5.png" width="45px" height="45px" 
+                                alt="" class="rounded-circle">
+                            </span>
+                            {{ member.fullname }}</td>
+                        <td class="align-middle">{{ member.phone }}</td>
+                        <td class="align-middle">{{ member.blood_group }}</td>
+                        <td class="align-middle">{{member.package_amount}}</td>
+                        <td class="align-middle">{{member.package_name}}</td>
+                        <td class="align-middle">{{member.instructor_name}}</td>
+                        <td class="align-middle">
+                            <span></span>    {{member.instructor_name}}
+                        </td>
+                           <td class="align-middle">
+                               <button class="btn btn-sm btn-danger" ng-click="collectFeeModal(member)">
+                                   <i class="far fa-plus-square mr-2"></i>Fee
+                                </button>
+                           </td>
+                       </tr>
+                   </tbody>
+               </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Collect Fee Modal Starts  -->
+<div class="modal fade" id="modalCollectFee">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Collect Fee</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid py-2">
+                <div>
+                    <form name="collectFeeForm" novalidate>
+                        <input type="hidden" ng-model="ng_memid">
+                        <input type="hidden" ng-model="ng_mempack">
+                        <div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Name <span class="req">*</span> </label>
+                                        <input class="form-control" type="text" placeholder="Name"
+                                         name="memname" ng-model="ng_memname" pattern="^[a-z A-Z]*$" required>
+                                    </div>
+                                    <div class="form-group" ng-show="collectFeeForm.memname.$dirty && collectFeeForm.memname.$invalid">
+                                        <small class="text-danger" ng-show="collectFeeForm.memname.$invalid">
+                                            ( Only characters are allowed )
+                                        </small>
+                                        <br>
+                                        <small class="text-danger" ng-show="collectFeeForm.memname.$error.required">
+                                            Required
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Amount <span class="req">*</span> </label>
+                                        <input class="form-control"  type="text" placeholder="Rs. 2000" 
+                                         name="memfee" ng-model="ng_memfee" required="required"
+                                          minlength="3" maxlength="5" pattern="^[0-9]*$">
+                                    </div>
+                                    <div class="form-group" ng-show="collectFeeForm.memfee.$dirty && collectFeeForm.memfee.$invalid">
+                                        <small class="text-danger" ng-show="collectFeeForm.memfee.$invalid">
+                                            ( Only number allowed, no character accepted )
+                                        </small>
+                                        <br>
+                                        <small class="text-danger" ng-show="collectFeeForm.memfee.$error.required">
+                                            Required*
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Date <span class="req">*</span> </label>
+                                        <input class="form-control"  type="date"
+                                         name="feedate" ng-model="ng_feedate" required="required">
+                                    </div>
+                                    <div class="form-group" ng-show="addPackageForm.feedate.$dirty && addPackageForm.feedate.$invalid">
+                                        <small class="text-danger" ng-show="addPackageForm.feedate.$error.required">
+                                            Required*
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <button class="btn btn-block btn-info btn-md" 
+                                    ng-disabled="collectFeeForm.$invalid || ng_category===0 || ng_category === ''" 
+                                    ng-click="collectFee()">Collect Fee</button> 
+                                </div>   
+                            </div>    
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- Sub-Category Edit Modal Ends  -->
+
+<script> 
+    $('.select2').select2();
+ 
+</script>
+    
+</script>
